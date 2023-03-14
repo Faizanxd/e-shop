@@ -11,7 +11,9 @@ export default function Layout() {
       <main className="font-Roboto">
         <Outlet />
       </main>
-      <footer className="font-Roboto">{/* <Footer /> */}</footer>
+      <footer className="font-Roboto inset-0">
+        <Footer />
+      </footer>
     </>
   );
 }

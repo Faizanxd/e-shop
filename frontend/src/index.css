@@ -5,12 +5,9 @@
 @tailwind utilities;
 
 
-/* .body{
-    background: theme("colors.gray.100");
+body{
+    background: theme("colors.gray.800");
     color: theme("colors.white");
    }
 
-   .root{
-    background: theme("colors.gray.100");
-    color: theme("colors.white");
-   } */
+  
