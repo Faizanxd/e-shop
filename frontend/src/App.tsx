@@ -5,22 +5,33 @@ import {
 } from "react-router-dom";
 import Layout from "./components/layout";
 import Home from "./pages/home";
+import Login from "./pages/login";
 import Shop from "./pages/shop";
+import SignUp from "./pages/signup";
+import Cart from "./pages/user/cart";
+import Orders from "./pages/user/orders";
 
 function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<Outlet />}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+          <Route path="shop" element={<Layout />}>
+            <Route index element={<Shop />} />
           </Route>
-          <Route path="cart" element={<div>About</div>}>
-            <Route index element={<div>About Index</div>} />
+          <Route path="orders" element={<Layout />}>
+            <Route index element={<Orders />} />
+          </Route>
+          <Route path="cart" element={<Layout />}>
+            <Route index element={<Cart />} />
           </Route>
         </Route>
-        <Route path="/signup" element={<div>Home</div>} />
-        <Route path="/login" element={<div>Home</div>} />
+
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+        </Route>
+        <Route path="/signup" element={<Login />} />
+        <Route path="/login" element={<SignUp />} />
       </>
     )
   );

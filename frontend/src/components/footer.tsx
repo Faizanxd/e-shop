@@ -3,7 +3,7 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <footer className="fixed bottom-0 h-auto w-full rounded-md border border-gray-600 bg-gray-800 p-4 shadow sm:flex sm:items-center sm:justify-between sm:p-6 ">
+      <footer className="sticky bottom-0 mt-2 h-auto w-full rounded-md border border-gray-600 bg-gray-800 p-4 shadow sm:flex sm:items-center sm:justify-between sm:p-6 ">
         <p className="mb-4 text-center text-sm text-gray-400 sm:mb-0">
           &copy; 2019-2023{" "}
           <a href="." className="hover:underline" target="_blank">

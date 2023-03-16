@@ -1,4 +1,12 @@
+import { useState } from "react";
+
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  function headerOpen() {
+    setIsOpen(!isOpen);
+    document.getElementById("mobile-menu-2")?.classList.toggle("hidden");
+  }
+
   return (
     <header>
       <nav className="border-b border-gray-500 bg-gray-800 px-4 py-2.5 lg:px-6 ">
@@ -6,7 +14,7 @@ export default function Header() {
           <a href="/" className="flex items-center">
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAClElEQVR4nO1bz2tTQRAeLxZULJX4N3jq3d578OfOioRHD5Vg/gYv1n9BoZ4V1HrKTo4WVGJDi4ciVOyl14pXBUHEitSV3fQlG5LmPZP3YzvZgQ/CZPa9mY9vZt/CewDBMjJB7wFJFwJBW+CdYUHFx/DOsJNY9FLnikAAnnAFVO5u6Eq93efDpwd6rtYa8LNUQKXe1hedQk3xs8tv7NoLtRZ/AiIH0hR/561dd375tcYnv6aHADlG8WwIkGMWz4IAOUHxLAiYq7VsnBl8ZgCO2h1YElCpt+20d4sftjuwJSCaEIEAzF0B+hQI2ij8cJM71DtbW6LJxkL5yeaEm83LyQQgPTLBl+59yr2fi4Kp5UgFD5Plj/TZBC+ufis98aywuPq1Q4BQX0a3gezI/8zSKx2tlZ94ZljT+uzSeoo2QH7y/4820D35P+Yj/ximpUe3gWQq/9RtgHzln6INNGv5J7eBZC7/xDZA/vIf3QZC7Zf+mFo0TM1dKzuZstC1I4crlcEgfnHgSyLlEyDot3FUXxzaRdXnh72F1cZpG3NlfSb28YhTBy4jH4xz/sGevv3sj55f2XN6Rd2HauMcCFqJfSziBG33CJDqRrrBof524LMv9RC81tcWIJrXLSuofoKg3W6g/W192yDVVbvQ/Bb0w0ufaN4CQR9B0HdA2hlax0Dxw2zY8DiJNnYdGAjQfcxl8Q6Q+25Pnu8UuffJTAGYUXJZXy/tfbIiIDrmkJH2/7TXGxeBAAwK0KEFMMwAHYZgbGEXoLANQngOIH8fhGBqnwQFbeV4Ftj0n4CiLBBAQQEQWoDCDICJhweGIaj57gKiwG/+fEHft4foQUJloGsJ8uWGQAAeowCYNhRyMPEV7oEJptj+AWbq1InNfUxIAAAAAElFTkSuQmCC"
-              className="mr-1 h-10"
+              className="mr-2 mb-2 h-10"
             />
             <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
               .Store
@@ -14,20 +22,21 @@ export default function Header() {
           </a>
           <div className="flex items-center lg:order-2">
             <a
-              href="#"
+              href="/login"
               className="hover:bg-gray-700focus:ring-gray-800 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-400 hover:text-white  focus:outline-none focus:ring-4 lg:px-5 lg:py-2.5"
             >
               Log in
             </a>
 
             <a
-              href="#"
+              href="/signup"
               className="mr-2 rounded-lg  bg-primary-600 px-4 py-2 text-sm font-medium  text-white hover:bg-primary-700 focus:outline-none focus:ring-4 focus:ring-primary-300  lg:px-5 lg:py-2.5"
             >
               Sign Up
             </a>
             <button
               data-collapse-toggle="mobile-menu-2"
+              onClick={headerOpen}
               type="button"
               className="ml-1 inline-flex items-center rounded-lg p-2 text-sm  text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 lg:hidden"
               aria-controls="mobile-menu-2"
@@ -67,7 +76,7 @@ export default function Header() {
             <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
               <li>
                 <a
-                  href="#"
+                  href="/shop"
                   className="block rounded bg-primary-700 py-2 pr-4 pl-3 text-white hover:text-primary-800 lg:bg-transparent lg:p-0 lg:text-primary-700 "
                 >
                   Shop
@@ -75,7 +84,7 @@ export default function Header() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/orders"
                   className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
                 >
                   Orders
@@ -83,7 +92,7 @@ export default function Header() {
               </li>
               <li>
                 <a
-                  href="#"
+                  href="/cart"
                   className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
                 >
                   Cart
@@ -92,7 +101,7 @@ export default function Header() {
 
               <li>
                 <a
-                  href="#"
+                  href="/support"
                   className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
                 >
                   Support

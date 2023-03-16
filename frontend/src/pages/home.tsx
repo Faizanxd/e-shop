@@ -13,7 +13,7 @@ export default function Home() {
             their products.
           </p>
           <a
-            href="#"
+            href="/login"
             className="mr-3 inline-flex items-center justify-center rounded-lg bg-primary-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
           >
             Get started
