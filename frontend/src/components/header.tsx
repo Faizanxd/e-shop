@@ -23,7 +23,7 @@ export default function Header() {
           <div className="flex items-center lg:order-2">
             <a
               href="/login"
-              className="hover:bg-gray-700focus:ring-gray-800 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-gray-400 hover:text-white  focus:outline-none focus:ring-4 lg:px-5 lg:py-2.5"
+              className="hover:bg-gray-700focus:ring-gray-800 mr-2 rounded-lg px-4 py-2 text-sm font-medium text-white hover:text-primary-600  focus:outline-none focus:ring-4 lg:px-5 lg:py-2.5"
             >
               Log in
             </a>
@@ -77,7 +77,7 @@ export default function Header() {
               <li>
                 <a
                   href="/shop"
-                  className="block rounded bg-primary-700 py-2 pr-4 pl-3 text-white hover:text-primary-800 lg:bg-transparent lg:p-0 lg:text-primary-700 "
+                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0  "
                 >
                   Shop
                 </a>
@@ -85,7 +85,7 @@ export default function Header() {
               <li>
                 <a
                   href="/orders"
-                  className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
+                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
                 >
                   Orders
                 </a>
@@ -93,7 +93,7 @@ export default function Header() {
               <li>
                 <a
                   href="/cart"
-                  className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
+                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
                 >
                   Cart
                 </a>
@@ -102,7 +102,7 @@ export default function Header() {
               <li>
                 <a
                   href="/support"
-                  className="block border-b border-gray-700 py-2 pr-4   pl-3 text-gray-400 hover:text-white lg:border-0 lg:p-0"
+                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
                 >
                   Support
                 </a>

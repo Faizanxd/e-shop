@@ -4,6 +4,8 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Layout from "./components/layout";
+import Loader from "./components/loader";
+import Error from "./pages/error";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Shop from "./pages/shop";
@@ -15,7 +17,7 @@ function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Outlet />}>
+        <Route path="/" element={<Outlet />} errorElement={<Error />}>
           <Route path="shop" element={<Layout />}>
             <Route index element={<Shop />} />
           </Route>
@@ -27,11 +29,11 @@ function AppRouter() {
           </Route>
         </Route>
 
-        <Route path="/" element={<Layout />}>
+        <Route path="/" element={<Layout />} errorElement={<Error />}>
           <Route index element={<Home />} />
         </Route>
-        <Route path="/signup" element={<Login />} />
-        <Route path="/login" element={<SignUp />} />
+        <Route path="/signup" element={<Login />} errorElement={<Error />} />
+        <Route path="/login" element={<SignUp />} errorElement={<Error />} />
       </>
     )
   );

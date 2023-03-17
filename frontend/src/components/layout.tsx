@@ -8,10 +8,10 @@ export default function Layout() {
       <header className="font-Roboto">
         <Header />
       </header>
-      <main className="font-Roboto">
+      <main className="font-Roboto ">
         <Outlet />
       </main>
-      <footer className="font-Roboto inset-0">
+      <footer className="font-Roboto ">
         <Footer />
       </footer>
     </>
