@@ -7,3 +7,7 @@ export type Product = {
   rating: any;
   name: string;
 };
+
+// export type ProductWithQuantity = Product & {
+//   quantity: number;
+// };
