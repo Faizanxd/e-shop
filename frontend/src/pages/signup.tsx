@@ -1,4 +1,24 @@
+import axios from "axios";
+
 export default function SignUp() {
+  const email = document.getElementById("email") as HTMLInputElement;
+  const password = document.getElementById("password") as HTMLInputElement;
+  const confirmPassword = document.getElementById(
+    "confirmPassword"
+  ) as HTMLInputElement;
+
+  if (password.value !== confirmPassword.value) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  async function handleSubmit() {
+    await axios.post("http://localhost:8000/api/signup", {
+      email: email.value,
+      password: password.value,
+    });
+  }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
@@ -16,7 +36,7 @@ export default function SignUp() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-2xl">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="email"

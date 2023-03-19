@@ -12,12 +12,6 @@ export default function Shop() {
       .then((json) => setProducts(json));
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:5173/api")
-      .then((res) => res.json())
-      .then((json) => console.log(json));
-  }, []);
-
   if (!products.length) {
     return <Loader />;
   }
