@@ -1,10 +1,17 @@
 const express = require("express");
 const router = express.Router();
+const dbx = require("../database/database");
 
 router.post("/signup", async (req, res) => {
-  const body = req.body;
-  res.json({ message: "Signup successful" });
-  console.log(body);
+  const { email, password } = req.body;
+  const db = await dbx.getDb();
+  const existingUser = await db.collection("users").findOne({ email });
+  if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
+  } else {
+    const user = await db.collection("users").insertOne({ email, password });
+    return res.status(200).json({ message: "User created" });
+  }
 });
 
 module.exports = router;
