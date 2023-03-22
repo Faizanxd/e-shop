@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+
   function headerOpen() {
     setIsOpen(!isOpen);
     document.getElementById("mobile-menu-2")?.classList.toggle("hidden");
@@ -11,7 +12,7 @@ export default function Header() {
     <header>
       <nav className="border-b border-gray-500 bg-gray-800 px-4 py-2.5 lg:px-6 ">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
-          <a href="/" className="flex items-center">
+          <a href="/home" className="flex items-center">
             <img
               src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAClElEQVR4nO1bz2tTQRAeLxZULJX4N3jq3d578OfOioRHD5Vg/gYv1n9BoZ4V1HrKTo4WVGJDi4ciVOyl14pXBUHEitSV3fQlG5LmPZP3YzvZgQ/CZPa9mY9vZt/CewDBMjJB7wFJFwJBW+CdYUHFx/DOsJNY9FLnikAAnnAFVO5u6Eq93efDpwd6rtYa8LNUQKXe1hedQk3xs8tv7NoLtRZ/AiIH0hR/561dd375tcYnv6aHADlG8WwIkGMWz4IAOUHxLAiYq7VsnBl8ZgCO2h1YElCpt+20d4sftjuwJSCaEIEAzF0B+hQI2ij8cJM71DtbW6LJxkL5yeaEm83LyQQgPTLBl+59yr2fi4Kp5UgFD5Plj/TZBC+ufis98aywuPq1Q4BQX0a3gezI/8zSKx2tlZ94ZljT+uzSeoo2QH7y/4820D35P+Yj/ximpUe3gWQq/9RtgHzln6INNGv5J7eBZC7/xDZA/vIf3QZC7Zf+mFo0TM1dKzuZstC1I4crlcEgfnHgSyLlEyDot3FUXxzaRdXnh72F1cZpG3NlfSb28YhTBy4jH4xz/sGevv3sj55f2XN6Rd2HauMcCFqJfSziBG33CJDqRrrBof524LMv9RC81tcWIJrXLSuofoKg3W6g/W192yDVVbvQ/Bb0w0ufaN4CQR9B0HdA2hlax0Dxw2zY8DiJNnYdGAjQfcxl8Q6Q+25Pnu8UuffJTAGYUXJZXy/tfbIiIDrmkJH2/7TXGxeBAAwK0KEFMMwAHYZgbGEXoLANQngOIH8fhGBqnwQFbeV4Ftj0n4CiLBBAQQEQWoDCDICJhweGIaj57gKiwG/+fEHft4foQUJloGsJ8uWGQAAeowCYNhRyMPEV7oEJptj+AWbq1InNfUxIAAAAAElFTkSuQmCC"
               className="mr-2 mb-2 h-10"

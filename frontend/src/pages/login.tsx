@@ -2,12 +2,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const url = "http://localhost:8000";
   const navigate = useNavigate();
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.target as HTMLFormElement);
     axios
-      .post("http://localhost:8000/api/login", data, {
+      .post(`${url}/login`, data, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -15,11 +16,10 @@ export default function Login() {
       .then((response) => {
         if (response.status === 200) {
           navigate("/shop");
-        } else {
-          alert("Login Failed");
         }
       });
   }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">

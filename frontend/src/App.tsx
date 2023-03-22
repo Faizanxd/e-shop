@@ -1,4 +1,4 @@
-import { Outlet, Route, RouterProvider } from "react-router";
+import { Navigate, Outlet, Route, RouterProvider } from "react-router";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,12 +11,29 @@ import Shop from "./pages/shop";
 import Login from "./pages/login";
 import Cart from "./pages/user/cart";
 import Orders from "./pages/user/orders";
+import { useAuth } from "./common/functions";
+
+function ProtectedRoute({ children }: { children: React.ReactElement }) {
+  const auth = useAuth();
+  if (auth === false) {
+    return <Navigate to="/login" />;
+  }
+  return children;
+}
 
 function AppRouter() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<Outlet />} errorElement={<Error />}>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Outlet />
+            </ProtectedRoute>
+          }
+          errorElement={<Error />}
+        >
           <Route path="shop" element={<Layout />}>
             <Route index element={<Shop />} />
           </Route>
@@ -28,7 +45,7 @@ function AppRouter() {
           </Route>
         </Route>
 
-        <Route path="/" element={<Layout />} errorElement={<Error />}>
+        <Route path="/home" element={<Layout />} errorElement={<Error />}>
           <Route index element={<Home />} />
         </Route>
         <Route path="/signup" element={<SignUp />} errorElement={<Error />} />

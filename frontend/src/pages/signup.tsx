@@ -3,24 +3,23 @@ import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const env = import.meta.env;
+  const url = "http://localhost:8000";
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.target as HTMLFormElement);
-    axios
-      .post("http://localhost:8000/api/signup", data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        navigate("/shop");
-      })
-      .catch((error) => {
-        if (error.response.status === 400) {
-          alert("Email already exists");
-        }
-      });
+    axios.post(`${url}/signup`, data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    axios.get(`${url}/signup`).then((res) => {
+      if (res.status === 200) {
+        navigate("/login");
+      } else {
+        alert("Something went wrong");
+      }
+    });
   }
 
   return (
