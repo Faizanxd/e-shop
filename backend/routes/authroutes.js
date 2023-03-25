@@ -71,18 +71,22 @@ router.post("/login", async (req, res) => {
     .collection("users")
     .findOne({ email: enteredEmail });
 
-  if (!existingUser) {
-    req.session.inputData = {
-      hasError: true,
-      message: "Could not login - please check your credientials",
-      email: enteredEmail,
+  try {
+    if (!existingUser) {
+      req.session.inputData = {
+        hasError: true,
+        message: "Could not login - please check your credientials",
+        email: enteredEmail,
+        password: enteredPassword,
+      };
 
-      password: enteredPassword,
-    };
-    req.session.save(() => {
-      res.status(401).json({ message: "Invalid input" });
-    });
-    return;
+      req.session.save(() => {
+        res.status(401).json({ message: "Invalid input" });
+      });
+      return;
+    }
+  } catch (err) {
+    console.log(err);
   }
 
   const passwordsAreEqual = await bcrypt.compare(
@@ -115,8 +119,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/auth", (req, res) => {
-  if (req.session.isAuthenticated) {
-    res.status(200).json({ message: "Authenticated" });
+  const isAuth = req.session.isAuthenticated;
+  if (isAuth === true) {
+    res.status(200).json({ message: "Success", user: req.session.user });
   } else {
     res.status(401).json({ message: "Not authenticated" });
   }

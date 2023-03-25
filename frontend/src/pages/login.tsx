@@ -4,19 +4,24 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const url = "http://localhost:8000";
   const navigate = useNavigate();
+
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.target as HTMLFormElement);
+
     axios
-      .post(`${url}/login`, data, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(`${url}/login`, data)
       .then((response) => {
         if (response.status === 200) {
           navigate("/shop");
+        } else {
+          console.log(response);
+          alert("Login failed");
         }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Login failed");
       });
   }
 

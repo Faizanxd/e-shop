@@ -1,4 +1,4 @@
-import { Navigate, Outlet, Route, RouterProvider } from "react-router";
+import { Outlet, Route, RouterProvider, useNavigate } from "react-router";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -12,13 +12,37 @@ import Login from "./pages/login";
 import Cart from "./pages/user/cart";
 import Orders from "./pages/user/orders";
 import { useAuth } from "./common/functions";
+import { useEffect, useState } from "react";
+import Loader from "./components/loader";
+import AddProducts from "./pages/admin-user/add-products";
 
-function ProtectedRoute({ children }: { children: React.ReactElement }) {
-  const auth = useAuth();
-  if (auth === false) {
-    return <Navigate to="/login" />;
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const navigate = useNavigate();
+  const isAuthenticated = useAuth();
+  const [auth, setAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function checkAuth(isAuthenticated: boolean) {
+      await setAuth(isAuthenticated);
+      if (auth === false) {
+        navigate("/home");
+      }
+      setIsLoading(false);
+    }
+
+    checkAuth(isAuthenticated);
+  }, []);
+
+  if (isLoading === true) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
   }
-  return children;
+
+  return <>{children}</>;
 }
 
 function AppRouter() {
@@ -28,9 +52,9 @@ function AppRouter() {
         <Route
           path="/"
           element={
-            <ProtectedRoute>
-              <Outlet />
-            </ProtectedRoute>
+            //  <ProtectedRoute>
+            <Outlet />
+            //   </ProtectedRoute>
           }
           errorElement={<Error />}
         >
@@ -44,7 +68,9 @@ function AppRouter() {
             <Route index element={<Cart />} />
           </Route>
         </Route>
-
+        <Route path="/create" element={<Layout />} errorElement={<Error />}>
+          <Route index element={<AddProducts />} />
+        </Route>
         <Route path="/home" element={<Layout />} errorElement={<Error />}>
           <Route index element={<Home />} />
         </Route>

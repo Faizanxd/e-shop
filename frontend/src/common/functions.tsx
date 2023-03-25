@@ -1,23 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
 
-export function useAuth() {
+export async function useAuth() {
   const url = "http://localhost:8000";
-  const [auth, setAuth] = useState(false);
+  let auth = false;
 
-  axios
-    .get(`${url}/auth`)
-    .then((res) => {
-      if (res.data.auth) {
-        setAuth(true);
-      } else {
-        setAuth(false);
-      }
-    })
-    .catch((err) => {
-      setAuth(false);
-      console.log(err);
-    });
+  const res = await axios.get(`${url}/auth`);
 
+  if (res.data.auth) {
+    auth = true;
+  }
+
+  console.log(auth);
   return auth;
 }

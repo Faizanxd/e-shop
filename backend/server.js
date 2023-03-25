@@ -4,6 +4,7 @@ const app = express();
 const db = require("./database/database");
 const mongodbStore = require("connect-mongodb-session");
 const session = require("express-session");
+const { authCheck } = require("./middlewares/auth");
 const MongoDBStore = mongodbStore(session);
 
 const sessionStore = new MongoDBStore({
@@ -48,6 +49,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use(require("./routes/authroutes"));
+app.use(authCheck);
 app.use(require("./routes/userroutes"));
 
 db.connectToDatabase().then(() => {
