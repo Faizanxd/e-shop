@@ -112,19 +112,12 @@ router.post("/login", async (req, res) => {
     id: existingUser._id,
     email: existingUser.email,
   };
+
   req.session.isAuthenticated = true;
+
   req.session.save(function () {
     res.status(200).json({ message: "Success" });
   });
-});
-
-router.get("/auth", (req, res) => {
-  const isAuth = req.session.isAuthenticated;
-  if (isAuth === true) {
-    res.status(200).json({ message: "Success", user: req.session.user });
-  } else {
-    res.status(401).json({ message: "Not authenticated" });
-  }
 });
 
 module.exports = router;

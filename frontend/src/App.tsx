@@ -11,28 +11,24 @@ import Shop from "./pages/shop";
 import Login from "./pages/login";
 import Cart from "./pages/user/cart";
 import Orders from "./pages/user/orders";
-import { useAuth } from "./common/functions";
+
 import { useEffect, useState } from "react";
 import Loader from "./components/loader";
-import AddProducts from "./pages/admin-user/add-products";
+
+import CreateProduct from "./pages/admin-user/createProduct";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-  const isAuthenticated = useAuth();
-  const [auth, setAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function checkAuth(isAuthenticated: boolean) {
-      await setAuth(isAuthenticated);
-      if (auth === false) {
-        navigate("/home");
-      }
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } else {
       setIsLoading(false);
     }
-
-    checkAuth(isAuthenticated);
-  }, []);
+  }, [navigate]);
 
   if (isLoading === true) {
     return (
@@ -69,7 +65,7 @@ function AppRouter() {
           </Route>
         </Route>
         <Route path="/create" element={<Layout />} errorElement={<Error />}>
-          <Route index element={<AddProducts />} />
+          <Route index element={<CreateProduct />} />
         </Route>
         <Route path="/home" element={<Layout />} errorElement={<Error />}>
           <Route index element={<Home />} />

@@ -1,9 +1,35 @@
-export default function createProduct() {
+import axios from "axios";
+import { useRef } from "react";
+
+export default function CreateProduct() {
+  const openRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const url = "http://localhost:8000";
+  function openModal() {
+    openRef.current?.classList.toggle("hidden");
+    buttonRef.current?.classList.toggle("hidden");
+  }
+
+  function closeModal() {
+    openRef.current?.classList.toggle("hidden");
+    buttonRef.current?.classList.toggle("hidden");
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    closeModal();
+    const data = new FormData(event.target as HTMLFormElement);
+    axios.post(`${url}/products`, data).then((res) => {
+      console.log(res);
+    });
+  }
+
   return (
     <>
       <div className="m-5 flex justify-center">
         <button
           id="defaultModalButton"
+          ref={buttonRef}
+          onClick={openModal}
           data-modal-toggle="defaultModal"
           className="block rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
           type="button"
@@ -15,10 +41,11 @@ export default function createProduct() {
       <div
         id="defaultModal"
         aria-hidden="true"
-        className="h-modal fixed top-0 right-0 left-0 z-50 hidden w-full items-center justify-center overflow-y-auto overflow-x-hidden md:inset-0 md:h-full"
+        ref={openRef}
+        className="h-modal fixed  z-50 hidden w-full items-center justify-center overflow-y-auto overflow-x-hidden  md:h-full md:pl-[200px] lg:pl-[400px] xl:pl-[600px]"
       >
         <div className="relative h-full w-full max-w-2xl p-4 md:h-auto">
-          <div className="relative rounded-lg bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
+          <div className="relative rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800 sm:p-5">
             <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                 Add Product
@@ -27,6 +54,7 @@ export default function createProduct() {
                 type="button"
                 className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
                 data-modal-toggle="defaultModal"
+                onClick={closeModal}
               >
                 <svg
                   aria-hidden="true"
@@ -45,7 +73,7 @@ export default function createProduct() {
               </button>
             </div>
 
-            <form action="#">
+            <form onSubmit={handleSubmit}>
               <div className="mb-4 grid gap-4 sm:grid-cols-2">
                 <div>
                   <label
@@ -65,19 +93,23 @@ export default function createProduct() {
                 </div>
                 <div>
                   <label
-                    htmlFor="brand"
                     className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                    htmlFor="file_input"
                   >
-                    Brand
+                    Upload image
                   </label>
                   <input
-                    type="text"
-                    name="brand"
-                    id="brand"
-                    className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-600 focus:ring-primary-600 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
-                    placeholder="Product brand"
-                    required
+                    className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:placeholder-gray-400"
+                    aria-describedby="file_input_help"
+                    id="file_input"
+                    type="file"
                   />
+                  <p
+                    className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                    id="file_input_help"
+                  >
+                    SVG, PNG, JPG or GIF (MAX. 800x400px).
+                  </p>
                 </div>
                 <div>
                   <label

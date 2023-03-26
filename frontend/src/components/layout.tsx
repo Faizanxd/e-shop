@@ -12,7 +12,8 @@ export default function Layout() {
         <Outlet />
       </main>
       <footer className="font-Roboto ">
-        <Footer />
+        {" "}
+        <Footer />{" "}
       </footer>
     </>
   );
