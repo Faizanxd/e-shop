@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function CreateProduct() {
   const openRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const url = "http://localhost:8000";
   function openModal() {
     openRef.current?.classList.toggle("hidden");
@@ -16,26 +16,51 @@ export default function CreateProduct() {
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    closeModal();
     const data = new FormData(event.target as HTMLFormElement);
-    axios.post(`${url}/products`, data).then((res) => {
-      console.log(res);
-    });
+
+    axios
+      .post(`${url}/createProducts`, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+      });
+    event.preventDefault();
+    closeModal();
   }
+
+  axios.get(`${url}/getProducts`).then((res) => {
+    console.log(res);
+  });
 
   return (
     <>
-      <div className="m-5 flex justify-center">
-        <button
-          id="defaultModalButton"
-          ref={buttonRef}
-          onClick={openModal}
-          data-modal-toggle="defaultModal"
-          className="block rounded-lg bg-primary-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-          type="button"
-        >
-          Create product
-        </button>
+      <div
+        className="grid grid-cols-1 items-center gap-6 p-6 md:grid-cols-2 md:pl-4 lg:grid-cols-3 xl:grid-cols-4 xl:pl-16"
+        ref={buttonRef}
+      >
+        <div className="flex h-80 w-full max-w-sm items-center justify-center  rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
+          <button
+            id="defaultModalButton"
+            onClick={openModal}
+            data-modal-toggle="defaultModal"
+            className="flex items-center justify-center  "
+            type="button"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              className="h-full w-[65%] text-primary-400 "
+            >
+              <path
+                d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
       <div
@@ -100,9 +125,11 @@ export default function CreateProduct() {
                   </label>
                   <input
                     className="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:placeholder-gray-400"
-                    aria-describedby="file_input_help"
-                    id="file_input"
                     type="file"
+                    id="image"
+                    name="image"
+                    required
+                    accept="image/jpg, image/jpeg, image/png"
                   />
                   <p
                     className="mt-1 text-sm text-gray-500 dark:text-gray-300"
@@ -136,6 +163,7 @@ export default function CreateProduct() {
                   </label>
                   <select
                     id="category"
+                    name="category"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                   >
                     <option>Select category</option>
@@ -154,6 +182,7 @@ export default function CreateProduct() {
                   </label>
                   <textarea
                     id="description"
+                    name="description"
                     className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"
                     placeholder="Write product description here"
                   ></textarea>

@@ -17,6 +17,7 @@ const sessionStore = new MongoDBStore({
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/images", express.static("images"));
 
 app.use(
   session({
@@ -50,7 +51,7 @@ app.use(async (req, res, next) => {
 });
 
 app.use(require("./routes/authroutes"));
-app.use(authCheck);
+// app.use(authCheck);
 app.use(require("./routes/userroutes"));
 // app.use(adminCheck);
 app.use(require("./routes/adminroutes"));
