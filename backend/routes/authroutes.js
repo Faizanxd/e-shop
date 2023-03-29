@@ -71,22 +71,18 @@ router.post("/login", async (req, res) => {
     .collection("users")
     .findOne({ email: enteredEmail });
 
-  try {
-    if (!existingUser) {
-      req.session.inputData = {
-        hasError: true,
-        message: "Could not login - please check your credientials",
-        email: enteredEmail,
-        password: enteredPassword,
-      };
+  if (!existingUser) {
+    req.session.inputData = {
+      hasError: true,
+      message: "Could not login - please check your credientials",
+      email: enteredEmail,
+      password: enteredPassword,
+    };
 
-      req.session.save(() => {
-        res.status(401).json({ message: "Invalid input" });
-      });
-      return;
-    }
-  } catch (err) {
-    console.log(err);
+    req.session.save(() => {
+      res.status(401).json({ message: "Invalid input" });
+    });
+    return;
   }
 
   const passwordsAreEqual = await bcrypt.compare(

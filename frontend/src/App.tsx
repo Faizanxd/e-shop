@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import Layout from "./components/layout";
+import Layout from "./components/layout/layout";
 import Error from "./pages/error";
 import Home from "./pages/home";
 import SignUp from "./pages/signup";
@@ -11,11 +11,11 @@ import Shop from "./pages/shop";
 import Login from "./pages/login";
 import Cart from "./pages/user/cart";
 import Orders from "./pages/user/orders";
-
 import { useEffect, useState } from "react";
 import Loader from "./components/loader";
-
-import CreateProduct from "./pages/admin-user/createProduct";
+import Dashboard from "./pages/admin-user/dashboard";
+import LayoutUser from "./components/layout/layoutUser";
+import { LayoutAdmin } from "./components/layout/layoutadmin";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
@@ -54,18 +54,22 @@ function AppRouter() {
           }
           errorElement={<Error />}
         >
-          <Route path="shop" element={<Layout />}>
+          <Route path="shop" element={<LayoutUser />}>
             <Route index element={<Shop />} />
           </Route>
-          <Route path="orders" element={<Layout />}>
+          <Route path="orders" element={<LayoutUser />}>
             <Route index element={<Orders />} />
           </Route>
-          <Route path="cart" element={<Layout />}>
+          <Route path="cart" element={<LayoutUser />}>
             <Route index element={<Cart />} />
           </Route>
         </Route>
-        <Route path="/create" element={<Layout />} errorElement={<Error />}>
-          <Route index element={<CreateProduct />} />
+        <Route
+          path="/dashboard"
+          element={<LayoutAdmin />}
+          errorElement={<Error />}
+        >
+          <Route index element={<Dashboard />} />
         </Route>
         <Route path="/home" element={<Layout />} errorElement={<Error />}>
           <Route index element={<Home />} />

@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { Product } from "../common/types";
 
 export default function ProductCard({ product }: { product: Product }) {
-  const [rating, setRating] = useState(0);
+  // const [rating, setRating] = useState(0);
 
-  useEffect(() => {
-    setRating(product.rating.rate);
-  }, [product.rating.rate]);
+  // useEffect(() => {
+  //   setRating(product.rating.rate);
+  // }, [product.rating.rate]);
 
   return (
     <div className="h-auto w-full max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
       <span>
         <img
           className="h-60 w-full rounded-t-lg p-8"
-          src={product.image}
+          src={product.imagePath}
           alt="product image"
         />
       </span>
       <div className="px-5 pb-5">
         <h5 className="text-xl font-semibold  tracking-tight text-gray-900 line-clamp-1 dark:text-white">
-          {product.title}
+          {product.name}
         </h5>
-        <div className="mt-2.5 mb-5 flex items-center">
+        {/* <div className="mt-2.5 mb-5 flex items-center">
           {[...Array(5)].map((_, i) => (
             <svg
               key={i}
@@ -39,7 +39,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <span className="mr-2 ml-3 rounded bg-blue-100 px-2.5 py-0.5 text-xs font-semibold text-blue-800 dark:bg-blue-200 dark:text-blue-800">
             {rating}
           </span>
-        </div>
+        </div> */}
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-900 dark:text-white">
             {product.price}$

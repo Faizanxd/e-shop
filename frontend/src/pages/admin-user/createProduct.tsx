@@ -31,16 +31,9 @@ export default function CreateProduct() {
     closeModal();
   }
 
-  axios.get(`${url}/getProducts`).then((res) => {
-    console.log(res);
-  });
-
   return (
     <>
-      <div
-        className="grid grid-cols-1 items-center gap-6 p-6 md:grid-cols-2 md:pl-4 lg:grid-cols-3 xl:grid-cols-4 xl:pl-16"
-        ref={buttonRef}
-      >
+      <div className="" ref={buttonRef}>
         <div className="flex h-80 w-full max-w-sm items-center justify-center  rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
           <button
             id="defaultModalButton"
@@ -52,7 +45,7 @@ export default function CreateProduct() {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
-              className="h-full w-[65%] text-primary-400 "
+              className="h-full w-[65%] text-primary-400 hover:text-primary-500 dark:text-primary-500 dark:hover:text-primary-600"
             >
               <path
                 d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z"
@@ -67,7 +60,7 @@ export default function CreateProduct() {
         id="defaultModal"
         aria-hidden="true"
         ref={openRef}
-        className="h-modal fixed  z-50 hidden w-full items-center justify-center overflow-y-auto overflow-x-hidden  md:h-full md:pl-[200px] lg:pl-[400px] xl:pl-[600px]"
+        className=" fixed inset-0 z-50 hidden hidden h-full w-full items-center justify-center overflow-y-auto overflow-y-auto overflow-x-hidden md:overflow-y-auto md:overflow-x-hidden"
       >
         <div className="relative h-full w-full max-w-2xl p-4 md:h-auto">
           <div className="relative rounded-lg bg-white p-4 shadow-lg dark:bg-gray-800 sm:p-5">

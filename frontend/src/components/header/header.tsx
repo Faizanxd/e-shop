@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,46 +69,6 @@ export default function Header() {
                 ></path>
               </svg>
             </button>
-          </div>
-          <div
-            className="hidden w-full items-center justify-between lg:order-1 lg:flex lg:w-auto"
-            id="mobile-menu-2"
-          >
-            <ul className="mt-4 flex flex-col font-medium lg:mt-0 lg:flex-row lg:space-x-8">
-              <li>
-                <a
-                  href="/shop"
-                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0  "
-                >
-                  Shop
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/orders"
-                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
-                >
-                  Orders
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/cart"
-                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
-                >
-                  Cart
-                </a>
-              </li>
-
-              <li>
-                <a
-                  href="/support"
-                  className="block rounded  py-2 pr-4 pl-3 text-white hover:text-primary-600 lg:bg-transparent lg:p-0"
-                >
-                  Support
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
       </nav>

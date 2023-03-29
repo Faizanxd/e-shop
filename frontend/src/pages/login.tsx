@@ -10,7 +10,11 @@ export default function Login() {
     const data = new FormData(event.target as HTMLFormElement);
 
     axios
-      .post(`${url}/login`, data)
+      .post(`${url}/login`, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         if (response.status === 200) {
           navigate("/shop");
