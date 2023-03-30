@@ -31,7 +31,7 @@ router.post("/createProducts", upload.single("image"), async (req, res) => {
 
 router.get("/getProducts", async (req, res) => {
   const products = await db.getDb().collection("products").find().toArray();
-  res.status(200).json({ message: "Success", products: products });
+  res.status(200).json({ products: products });
 });
 
 router.get("/getProduct/:id", async (req, res) => {

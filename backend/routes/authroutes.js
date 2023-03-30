@@ -116,4 +116,11 @@ router.post("/login", async (req, res) => {
   });
 });
 
+router.get("/checkAuth", (req, res) => {
+  if (req.session.isAuthenticated) {
+    res.status(200).json({ message: "Success" });
+  } else {
+    res.status(401).json({ message: "Not authenticated" });
+  }
+});
 module.exports = router;

@@ -17,26 +17,31 @@ import Dashboard from "./pages/admin-user/dashboard";
 import LayoutUser from "./components/layout/layoutUser";
 import { LayoutAdmin } from "./components/layout/layoutadmin";
 
+import { checkAuth, Loading } from "./common/functions";
+
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [auth, setAuth] = useState(false);
+  let isAuth = checkAuth();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    if (isAuth === true) {
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (auth === false) {
+      setIsLoading(true);
       navigate("/login");
     } else {
       setIsLoading(false);
+      navigate("/shop");
     }
-  }, [navigate]);
-
-  if (isLoading === true) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
-  }
+  }, [auth]);
 
   return <>{children}</>;
 }
@@ -48,9 +53,9 @@ function AppRouter() {
         <Route
           path="/"
           element={
-            //  <ProtectedRoute>
+            // <ProtectedRoute>
             <Outlet />
-            //   </ProtectedRoute>
+            //</ProtectedRoute>
           }
           errorElement={<Error />}
         >
